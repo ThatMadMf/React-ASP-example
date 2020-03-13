@@ -1,3 +1,4 @@
+using System;
 using CompanyProjects.Data;
 using CompanyProjects.Models;
 
@@ -13,6 +14,9 @@ namespace CompanyProjects.Services
 
         public Contribution AddContribution(Contribution contribution)
         {
+            if(contribution.StartDate == null) {
+                contribution.StartDate = DateTime.Now;
+            }
             context.Contributions.Add(contribution);
 
             context.SaveChanges();

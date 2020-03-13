@@ -18,7 +18,7 @@ namespace CompanyProjects.Services
             return context.CompanyStaff.ToList(); 
         }
         public Employee GetEmployeeById(int id) {
-            return context.CompanyStaff.Where(employee => employee.Id == id).First(); 
+            return context.CompanyStaff.Find(id); 
         }
 
         public Employee AddEmployee(Employee employee)

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyProjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200313122743_InitialCreate")]
+    [Migration("20200313125350_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,18 +30,16 @@ namespace CompanyProjects.Migrations
                     b.Property<int>("ExecutorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("FinishDate")
+                    b.Property<DateTime?>("FinishDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExecutorId");
 
                     b.HasIndex("ProjectId");
 
@@ -84,13 +82,7 @@ namespace CompanyProjects.Migrations
 
             modelBuilder.Entity("CompanyProjects.Models.Contribution", b =>
                 {
-                    b.HasOne("CompanyProjects.Models.Employee", "Executor")
-                        .WithMany()
-                        .HasForeignKey("ExecutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CompanyProjects.Models.Project", "project")
+                    b.HasOne("CompanyProjects.Models.Project", null)
                         .WithMany("Contributions")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -41,8 +41,8 @@ namespace CompanyProjects.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ContributionDescription = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    FinishDate = table.Column<DateTime>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: true),
+                    FinishDate = table.Column<DateTime>(nullable: true),
                     ExecutorId = table.Column<int>(nullable: false),
                     ProjectId = table.Column<int>(nullable: false)
                 },
@@ -50,23 +50,12 @@ namespace CompanyProjects.Migrations
                 {
                     table.PrimaryKey("PK_Contributions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contributions_CompanyStaff_ExecutorId",
-                        column: x => x.ExecutorId,
-                        principalTable: "CompanyStaff",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Contributions_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contributions_ExecutorId",
-                table: "Contributions",
-                column: "ExecutorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_ProjectId",
@@ -77,10 +66,10 @@ namespace CompanyProjects.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contributions");
+                name: "CompanyStaff");
 
             migrationBuilder.DropTable(
-                name: "CompanyStaff");
+                name: "Contributions");
 
             migrationBuilder.DropTable(
                 name: "Projects");
