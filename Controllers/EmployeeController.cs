@@ -15,7 +15,7 @@ namespace CompanyProjects.Controllers
         }
 
         [HttpPost]
-        public Employee AddEmployee([FromBody] Employee employee) {
+        public ActionResult<Employee> AddEmployee(Employee employee) {   
             return employeeService.AddEmployee(employee);
         }
     }

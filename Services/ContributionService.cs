@@ -19,7 +19,7 @@ namespace CompanyProjects.Services
         {
             Contribution contribution = context.Contributions.Find(id);
             if(contribution == null) {
-                throw new RecordWithIdNotExist("Contribution with this id does not exist");
+                throw new RecordWithIdNotExists("Contribution with this id does not exist");
             }
             return contribution;
         }

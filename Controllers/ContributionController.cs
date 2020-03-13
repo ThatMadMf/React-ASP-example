@@ -23,7 +23,7 @@ namespace CompanyProjects.Controllers
             {
                 return contributionService.FindContributionById(id);
             }
-            catch(RecordWithIdNotExist e)
+            catch(RecordWithIdNotExists e)
             {
                 return BadRequest(e.Message);
             }

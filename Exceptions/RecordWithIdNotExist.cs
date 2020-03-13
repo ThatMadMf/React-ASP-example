@@ -4,21 +4,21 @@ using System.Runtime.Serialization;
 namespace CompanyProjects.Exceptions
 {
     [Serializable]
-    internal class RecordWithIdNotExist : Exception
+    internal class RecordWithIdNotExists : Exception
     {
-        public RecordWithIdNotExist()
+        public RecordWithIdNotExists()
         {
         }
 
-        public RecordWithIdNotExist(string message) : base(message)
+        public RecordWithIdNotExists(string message) : base(message)
         {
         }
 
-        public RecordWithIdNotExist(string message, Exception innerException) : base(message, innerException)
+        public RecordWithIdNotExists(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected RecordWithIdNotExist(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected RecordWithIdNotExists(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

@@ -23,19 +23,19 @@ namespace CompanyProjects.Controllers
         }
 
         [HttpGet("{id}")]
-        public Project GetTaskById(int id)
+        public ActionResult<Project> GetTaskById(int id)
         {
             return projectService.GetProjectById(id);
         }
 
         [HttpPost]
-        public Project AddProject(Project project)
+        public ActionResult<Project> AddProject(Project project)
         {
             return projectService.SaveProject(project);
         }
 
         [HttpPut("{id}")]
-        public Project PutTask(int id, Project project)
+        public ActionResult<Project> PutTask(int id, Project project)
         {
             return projectService.ChangeProjectName(id, project);
         }

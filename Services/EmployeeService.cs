@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CompanyProjects.Data;
+using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 
 namespace CompanyProjects.Services
@@ -18,7 +19,12 @@ namespace CompanyProjects.Services
             return context.CompanyStaff.ToList(); 
         }
         public Employee GetEmployeeById(int id) {
-            return context.CompanyStaff.Find(id); 
+            Employee employee = context.CompanyStaff.Find(id);
+            if(employee == null)
+            {
+                throw new RecordWithIdNotExists("Employee with id does not exist");
+            }
+            return employee;
         }
 
         public Employee AddEmployee(Employee employee)
