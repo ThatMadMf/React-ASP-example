@@ -10,6 +10,6 @@ namespace CompanyProjects.Data
         }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Contribution> Contributions { get; set; }
-        public DbSet<Employee> Staff { get; set; }
+        public DbSet<Employee> CompanyStaff { get; set; }
     }
 }

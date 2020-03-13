@@ -9,6 +9,5 @@ namespace CompanyProjects.Models
         [Required]
         public string Name { get; set; }
         public ICollection<Contribution> Contributions { get; set; }
-        public ICollection<Employee> Staff { get; set; }
     }
 }
