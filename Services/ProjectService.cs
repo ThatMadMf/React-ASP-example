@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CompanyProjects.Data;
 using CompanyProjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CompanyProjects.Services
 {
@@ -14,23 +15,27 @@ namespace CompanyProjects.Services
             this.context = context;
         }
 
-        public List<Project> GetAll() {
+        public List<Project> GetAll()
+        {
             return context.Projects.ToList();
         }
 
-        public Project GetProjectById(int id) {
-            return context.Projects.Where(t => t.Id == id).First(); 
+        public Project GetProjectById(int id)
+        {
+            return context.Projects.Where(p => p.Id == id).Include(p => p.Contributions).First();
+
         }
 
         public Project SaveProject(Project project)
         {
             context.Projects.Add(project);
-            
+
             context.SaveChanges();
             return project;
         }
 
-        public Project ChangeProjectName(int id, Project project) {
+        public Project ChangeProjectName(int id, Project project)
+        {
             Project projectToChange = GetProjectById(id);
             projectToChange.Name = project.Name;
 
@@ -38,7 +43,8 @@ namespace CompanyProjects.Services
             return projectToChange;
         }
 
-        public void RemoveProject(int id) {
+        public void RemoveProject(int id)
+        {
             Project projectToRemove = GetProjectById(id);
             context.Remove(projectToRemove);
 

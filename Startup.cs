@@ -27,6 +27,7 @@ namespace CompanyProjects
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -35,6 +36,8 @@ namespace CompanyProjects
             });
 
             services.AddScoped<ProjectService, ProjectService>();
+            services.AddScoped<EmployeeService, EmployeeService>();
+            services.AddScoped<ContributionService, ContributionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

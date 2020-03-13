@@ -9,9 +9,7 @@ namespace CompanyProjects.Models
         public string ContributionDescription { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime FinishDate { get; set; }
-        public int ExecutroId { get; set; }
-        public Employee Executor { get; set; }
+        public int ExecutorId { get; set; }
         public int ProjectId { get; set; }
-        public Project project { get; set; }
     }
 }

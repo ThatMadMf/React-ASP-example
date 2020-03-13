@@ -22,10 +22,24 @@ namespace CompanyProjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<string>("ContributionDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ExecutorId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("FinishDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ExecutorId");
 
                     b.HasIndex("ProjectId");
 
@@ -38,14 +52,17 @@ namespace CompanyProjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecondName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Staff");
+                    b.ToTable("CompanyStaff");
                 });
 
             modelBuilder.Entity("CompanyProjects.Models.Project", b =>
@@ -55,6 +72,7 @@ namespace CompanyProjects.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -64,16 +82,17 @@ namespace CompanyProjects.Migrations
 
             modelBuilder.Entity("CompanyProjects.Models.Contribution", b =>
                 {
-                    b.HasOne("CompanyProjects.Models.Project", null)
-                        .WithMany("Contributions")
-                        .HasForeignKey("ProjectId");
-                });
+                    b.HasOne("CompanyProjects.Models.Employee", "Executor")
+                        .WithMany()
+                        .HasForeignKey("ExecutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("CompanyProjects.Models.Employee", b =>
-                {
-                    b.HasOne("CompanyProjects.Models.Project", null)
-                        .WithMany("Staff")
-                        .HasForeignKey("ProjectId");
+                    b.HasOne("CompanyProjects.Models.Project", "project")
+                        .WithMany("Contributions")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
