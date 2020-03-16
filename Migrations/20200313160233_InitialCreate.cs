@@ -40,7 +40,7 @@ namespace CompanyProjects.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ContributionDescription = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: true),
                     FinishDate = table.Column<DateTime>(nullable: true),
                     ExecutorId = table.Column<int>(nullable: false),

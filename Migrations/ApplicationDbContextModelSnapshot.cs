@@ -22,7 +22,7 @@ namespace CompanyProjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ContributionDescription")
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ExecutorId")
