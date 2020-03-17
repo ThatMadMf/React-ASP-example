@@ -22,12 +22,12 @@ namespace CompanyProjects
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlite(
+                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

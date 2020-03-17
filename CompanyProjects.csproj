@@ -20,12 +20,27 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
   </ItemGroup>
 
+ <PropertyGroup>
+  <DefaultItemExcludes>$(DefaultItemExcludes);your_nonproj.file;a\**\*.pattern</DefaultItemExcludes>
+ </PropertyGroup>
+
+<ItemGroup>
+  <None Remove="hidden.file" />
+  <Content Remove="wwwroot\lib\**\*" />
+</ItemGroup>
+
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
+
+  <PropertyGroup>
+  <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

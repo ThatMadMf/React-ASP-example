@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
@@ -28,10 +29,22 @@ namespace CompanyProjects.Controllers
             return projectService.GetProjectById(id);
         }
 
+        [HttpGet("{id}/technologies")]
+        public ICollection<string> GetProjectTechnologies(int id) 
+        {
+            return projectService.GetProjectTechnologies(id).Select(t => t.Name).ToHashSet();
+        } 
+
         [HttpPost]
         public ActionResult<Project> AddProject(Project project)
         {
             return projectService.SaveProject(project);
+        }
+
+        [HttpPost("{id}/pick-staff")]
+        public ActionResult<Project> PickStaff(int id)
+        {
+            return projectService.PickStaff(id);
         }
 
         [HttpPut("{id}")]
