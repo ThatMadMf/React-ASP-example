@@ -26,7 +26,7 @@ namespace CompanyProjects.Services
             .Where(e => e.Id == id)
             .Include(e => e.Contributions)
             .FirstOrDefault();
-            
+
             if (employee == null)
             {
                 throw new RecordWithIdNotExists("Employee with id does not exist");
@@ -72,10 +72,11 @@ namespace CompanyProjects.Services
                 var match = GetMatchingEmployee(technologies, employee.Id);
                 dictionary.Add(match.Key, match.Value);
             }
-            return dictionary.OrderByDescending(kp => kp.Value)
-                .Select(kp => kp.Key)
-                .Take(amount)
-                .ToList();
+
+            return GetFreeStaff().Select(e => GetMatchingEmployee(technologies, e.Id))
+            .OrderByDescending(kv => kv.Value)
+            .Select(kv => kv.Key)
+            .Take(amount).ToList();
         }
     }
 }
