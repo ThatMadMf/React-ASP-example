@@ -66,13 +66,6 @@ namespace CompanyProjects.Services
         }
         public ICollection<Employee> PickEmployees(ICollection<Technology> technologies, int amount)
         {
-            Dictionary<Employee, int> dictionary = new Dictionary<Employee, int>();
-            foreach (Employee employee in GetFreeStaff())
-            {
-                var match = GetMatchingEmployee(technologies, employee.Id);
-                dictionary.Add(match.Key, match.Value);
-            }
-
             return GetFreeStaff().Select(e => GetMatchingEmployee(technologies, e.Id))
             .OrderByDescending(kv => kv.Value)
             .Select(kv => kv.Key)
