@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CompanyProjects.Data;
@@ -28,6 +29,7 @@ namespace CompanyProjects.Services
             .Include(p => p.Contributions)
             .Include(p => p.ProjectTechnologies)
             .ThenInclude(pt => pt.Technology)
+            .Include(p => p.ActiveStaff)
             .FirstOrDefault();
         }
 
@@ -42,6 +44,16 @@ namespace CompanyProjects.Services
 
             context.SaveChanges();
             return project;
+        }
+
+        internal ICollection<Employee> GetProjectActiveStaff(int id)
+        {
+            return GetProjectById(id).ActiveStaff;
+        }
+
+        internal ICollection<Contribution> GetContributions(int id)
+        {
+            return GetProjectById(id).Contributions;
         }
 
         public Project ChangeProjectName(int id, Project project)
@@ -64,6 +76,7 @@ namespace CompanyProjects.Services
         public Project PickStaff(int id) {
             Project project = GetProjectById(id);
             project.ActiveStaff = employeeService.PickEmployees(GetProjectTechnologies(id), 2);
+            project.ActiveStaff.Select(e => e.ProjectId = id);
 
             context.SaveChanges();
             return project;

@@ -34,6 +34,10 @@ namespace CompanyProjects.Services
             return employee;
         }
 
+        public ICollection<Employee> GetFreeStaff()
+        {
+            return GetCompanyStaff().Where(e => e.ProjectId == null).ToList();
+        }
         public Employee AddEmployee(Employee employee)
         {
             context.CompanyStaff.Add(employee);
@@ -63,7 +67,7 @@ namespace CompanyProjects.Services
         public ICollection<Employee> PickEmployees(ICollection<Technology> technologies, int amount)
         {
             Dictionary<Employee, int> dictionary = new Dictionary<Employee, int>();
-            foreach (Employee employee in GetCompanyStaff())
+            foreach (Employee employee in GetFreeStaff())
             {
                 var match = GetMatchingEmployee(technologies, employee.Id);
                 dictionary.Add(match.Key, match.Value);

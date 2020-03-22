@@ -29,10 +29,22 @@ namespace CompanyProjects.Controllers
             return projectService.GetProjectById(id);
         }
 
+        [HttpGet("{id}/contributions")]
+        public ICollection<Contribution> GetContributions(int id)
+        {
+            return projectService.GetContributions(id);
+        }
+
         [HttpGet("{id}/technologies")]
         public ICollection<string> GetProjectTechnologies(int id) 
         {
             return projectService.GetProjectTechnologies(id).Select(t => t.Name).ToHashSet();
+        }
+
+        [HttpGet("{id}/staff")]
+        public ICollection<Employee> GetProjectActiveStaff(int id)
+        {
+            return projectService.GetProjectActiveStaff(id);
         } 
 
         [HttpPost]

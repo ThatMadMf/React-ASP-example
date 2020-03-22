@@ -41,7 +41,6 @@ namespace CompanyProjects.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: false),
-                    ActiveProjectId = table.Column<int>(nullable: true),
                     ProjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

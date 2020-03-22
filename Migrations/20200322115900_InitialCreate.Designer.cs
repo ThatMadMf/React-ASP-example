@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyProjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200317135240_InitialCreate")]
+    [Migration("20200322115900_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,9 +55,6 @@ namespace CompanyProjects.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ActiveProjectId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
