@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -59,10 +60,14 @@ namespace CompanyProjects.Controllers
             return projectService.PickStaff(id);
         }
 
-        [HttpPut("{id}")]
-        public ActionResult<Project> PutTask(int id, Project project)
+        [HttpDelete("{id}/staff/{employeeId}")]
+        public ActionResult<Project> RemoveEmployeeFromProject(int id, int employeeId)
         {
-            return projectService.ChangeProjectName(id, project);
+            try {
+            return projectService.RemoveEmployee(id, employeeId);
+            } catch (RecordWithIdNotExists e) {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]

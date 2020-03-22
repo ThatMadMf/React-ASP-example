@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CompanyProjects.Data;
+using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyProjects.Services
@@ -63,6 +65,22 @@ namespace CompanyProjects.Services
 
             context.SaveChanges();
             return projectToChange;
+        }
+
+        internal ActionResult<Project> RemoveEmployee(int id, int employeeId)
+        {
+            Project project = GetProjectById(id);
+            Employee employee = project.ActiveStaff
+            .Where(emp => emp.ProjectId == id && emp.Id == employeeId)
+            .FirstOrDefault();
+
+            if (employee == null)
+            {
+                throw new RecordWithIdNotExists("Employee not member of this project");
+            }
+            employee.ProjectId = null;
+            context.SaveChanges();
+            return GetProjectById(id);
         }
 
         public void RemoveProject(int id)
