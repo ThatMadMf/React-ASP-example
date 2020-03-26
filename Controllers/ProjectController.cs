@@ -4,10 +4,12 @@ using System.Net;
 using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyProjects.Controllers
 {
+    [Authorize]
     [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase

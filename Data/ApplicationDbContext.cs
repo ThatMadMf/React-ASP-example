@@ -1,11 +1,13 @@
 using CompanyProjects.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyProjects.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
         public DbSet<Project> Projects { get; set; }
@@ -14,19 +16,20 @@ namespace CompanyProjects.Data
         public DbSet<Technology> Technologies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<ProjectTechnology>()
-            .HasKey(t => new { t.ProjectId, t.TechnologyId });
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ProjectTechnology>()
+                .HasKey(t => new { t.ProjectId, t.TechnologyId });
 
-        modelBuilder.Entity<ProjectTechnology>()
-            .HasOne(pt => pt.Project)
-            .WithMany(p => p.ProjectTechnologies)
-            .HasForeignKey(pt => pt.ProjectId);
+            modelBuilder.Entity<ProjectTechnology>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.ProjectTechnologies)
+                .HasForeignKey(pt => pt.ProjectId);
 
-        modelBuilder.Entity<ProjectTechnology>()
-            .HasOne(pt => pt.Technology)
-            .WithMany(t => t.ProjectTechnologies)
-            .HasForeignKey(pt => pt.TechnologyId);
-    }
+            modelBuilder.Entity<ProjectTechnology>()
+                .HasOne(pt => pt.Technology)
+                .WithMany(t => t.ProjectTechnologies)
+                .HasForeignKey(pt => pt.TechnologyId);
+        }
     }
 }
