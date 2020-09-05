@@ -10,5 +10,7 @@ namespace CompanyProjects.Models
         public string FirstName { get; set; }
         [Required]
         public string SecondName { get; set; }
+        public int? ActiveProjectId { get; set; }
+        public ICollection<Contribution> Contributions { get; set; }
     }
 }

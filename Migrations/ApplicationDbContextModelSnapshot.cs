@@ -25,7 +25,7 @@ namespace CompanyProjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ExecutorId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("FinishDate")
@@ -37,7 +37,12 @@ namespace CompanyProjects.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("TechnologyId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("ProjectId");
 
@@ -50,15 +55,23 @@ namespace CompanyProjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ActiveProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SecondName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("CompanyStaff");
                 });
@@ -78,11 +91,68 @@ namespace CompanyProjects.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("CompanyProjects.Models.ProjectTechnology", b =>
+                {
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TechnologyId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProjectId", "TechnologyId");
+
+                    b.HasIndex("TechnologyId");
+
+                    b.ToTable("ProjectTechnology");
+                });
+
+            modelBuilder.Entity("CompanyProjects.Models.Technology", b =>
+                {
+                    b.Property<int>("TechnologyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TechnologyId");
+
+                    b.ToTable("Technologies");
+                });
+
             modelBuilder.Entity("CompanyProjects.Models.Contribution", b =>
                 {
+                    b.HasOne("CompanyProjects.Models.Employee", null)
+                        .WithMany("Contributions")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CompanyProjects.Models.Project", null)
                         .WithMany("Contributions")
                         .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CompanyProjects.Models.Employee", b =>
+                {
+                    b.HasOne("CompanyProjects.Models.Project", null)
+                        .WithMany("ActiveStaff")
+                        .HasForeignKey("ProjectId");
+                });
+
+            modelBuilder.Entity("CompanyProjects.Models.ProjectTechnology", b =>
+                {
+                    b.HasOne("CompanyProjects.Models.Project", "Project")
+                        .WithMany("ProjectTechnologies")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CompanyProjects.Models.Technology", "Technology")
+                        .WithMany("ProjectTechnologies")
+                        .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

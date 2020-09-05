@@ -9,10 +9,12 @@ namespace CompanyProjects.Services
     public class ProjectService
     {
         private ApplicationDbContext context;
+        private EmployeeService employeeService;
 
-        public ProjectService(ApplicationDbContext context)
+        public ProjectService(ApplicationDbContext context, EmployeeService employeeService)
         {
             this.context = context;
+            this.employeeService = employeeService;
         }
 
         public List<Project> GetAll()
@@ -22,8 +24,16 @@ namespace CompanyProjects.Services
 
         public Project GetProjectById(int id)
         {
-            return context.Projects.Where(p => p.Id == id).Include(p => p.Contributions).First();
+            return context.Projects.Where(p => p.Id == id)
+            .Include(p => p.Contributions)
+            .Include(p => p.ProjectTechnologies)
+            .ThenInclude(pt => pt.Technology)
+            .FirstOrDefault();
+        }
 
+        public ICollection<Technology> GetProjectTechnologies(int id)
+        {
+            return GetProjectById(id).ProjectTechnologies.Select(pt => pt.Technology).ToHashSet();
         }
 
         public Project SaveProject(Project project)
@@ -49,6 +59,14 @@ namespace CompanyProjects.Services
             context.Remove(projectToRemove);
 
             context.SaveChanges();
+        }
+
+        public Project PickStaff(int id) {
+            Project project = GetProjectById(id);
+            project.ActiveStaff = employeeService.PickEmployees(GetProjectTechnologies(id), 2);
+
+            context.SaveChanges();
+            return project;
         }
     }
 }
