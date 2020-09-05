@@ -10,8 +10,10 @@ namespace CompanyProjects.Services
     public class ContributionService
     {
         private ApplicationDbContext context;
-        public ContributionService(ApplicationDbContext context)
+        private EmployeeService employeeService;
+        public ContributionService(ApplicationDbContext context, EmployeeService employeeService)
         {
+            this.employeeService = employeeService;
             this.context = context;
         }
 
@@ -29,6 +31,9 @@ namespace CompanyProjects.Services
             if (contribution.StartDate == null)
             {
                 contribution.StartDate = DateTime.Now;
+            }
+            if(contribution.ProjectId != employeeService.GetEmployeeById(contribution.EmployeeId).ProjectId) {
+                throw new NotExistingForeignKeyException("Employee is not part of the project");
             }
             try
             {

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyProjects.Controllers
 {
-    [Route("api/employee")]
+    [Route("api/employees")]
     public class EmployeeController : ControllerBase
     {
         private EmployeeService employeeService;
@@ -12,6 +13,18 @@ namespace CompanyProjects.Controllers
         public EmployeeController(EmployeeService employeeService)
         {
             this.employeeService = employeeService;
+        }
+
+        [HttpGet]
+        public ICollection<Employee> GetAllCompanyStaff()
+        {
+            return employeeService.GetCompanyStaff();
+        }
+
+        [HttpGet("free")]
+        public ICollection<Employee> GetFreeStaff() 
+        {
+            return employeeService.GetFreeStaff();
         }
 
         [HttpPost]

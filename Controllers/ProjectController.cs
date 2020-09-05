@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyProjects.Controllers
 {
+    [Authorize]
     [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase
@@ -29,10 +32,22 @@ namespace CompanyProjects.Controllers
             return projectService.GetProjectById(id);
         }
 
+        [HttpGet("{id}/contributions")]
+        public ICollection<Contribution> GetContributions(int id)
+        {
+            return projectService.GetContributions(id);
+        }
+
         [HttpGet("{id}/technologies")]
         public ICollection<string> GetProjectTechnologies(int id) 
         {
             return projectService.GetProjectTechnologies(id).Select(t => t.Name).ToHashSet();
+        }
+
+        [HttpGet("{id}/staff")]
+        public ICollection<Employee> GetProjectActiveStaff(int id)
+        {
+            return projectService.GetProjectActiveStaff(id);
         } 
 
         [HttpPost]
@@ -47,10 +62,14 @@ namespace CompanyProjects.Controllers
             return projectService.PickStaff(id);
         }
 
-        [HttpPut("{id}")]
-        public ActionResult<Project> PutTask(int id, Project project)
+        [HttpDelete("{id}/staff/{employeeId}")]
+        public ActionResult<Project> RemoveEmployeeFromProject(int id, int employeeId)
         {
-            return projectService.ChangeProjectName(id, project);
+            try {
+            return projectService.RemoveEmployee(id, employeeId);
+            } catch (RecordWithIdNotExists e) {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]
