@@ -31,5 +31,10 @@ namespace CompanyProjects.Controllers
         public ActionResult<Employee> AddEmployee([FromBody] Employee employee) {   
             return employeeService.AddEmployee(employee);
         }
+
+        [HttpGet("{id}/contributions")]
+        public ICollection<Contribution> GetContributions(int id) {
+            return employeeService.GetAllEmployeeContributions(id);
+        }
     }
 }
