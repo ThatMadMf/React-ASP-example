@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyProjects.Controllers
 {
-    [Authorize]
+
     [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase
@@ -20,6 +20,7 @@ namespace CompanyProjects.Controllers
         {
             this.projectService = projectService;
         }
+
         [HttpGet]
         public IEnumerable<Project> GetTasks()
         {
@@ -66,7 +67,7 @@ namespace CompanyProjects.Controllers
         public ActionResult<Project> RemoveEmployeeFromProject(int id, int employeeId)
         {
             try {
-            return projectService.RemoveEmployee(id, employeeId);
+                return projectService.RemoveEmployee(id, employeeId);
             } catch (RecordWithIdNotExists e) {
                 return BadRequest(e.Message);
             }

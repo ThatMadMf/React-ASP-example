@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using CompanyProjects.Data;
 using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
@@ -24,6 +26,11 @@ namespace CompanyProjects.Services
                 throw new RecordWithIdNotExists("Contribution with this id does not exist");
             }
             return contribution;
+        }
+
+        internal ICollection<Contribution> GetContributionsByTechnology(int id)
+        {
+            return context.Contributions.Where(c => c.TechnologyId == id).ToList();
         }
 
         public Contribution AddContribution(Contribution contribution)
@@ -60,5 +67,10 @@ namespace CompanyProjects.Services
             context.SaveChanges();
             return contribution;
         }
+
+        public ICollection<Contribution> GetContributions()
+        {
+            return context.Contributions.ToList();
+        } 
     }
 }

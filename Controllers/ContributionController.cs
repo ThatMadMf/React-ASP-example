@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 using CompanyProjects.Services;
@@ -14,6 +15,18 @@ namespace CompanyProjects.Controllers
         public ContributionController(ContributionService contributionService)
         {
             this.contributionService = contributionService;
+        }
+
+        [HttpGet]
+        public ICollection<Contribution> GetContributions()
+        {
+            return contributionService.GetContributions();
+        }
+
+        [HttpGet("technology/{id}")]
+        public ICollection<Contribution> GetContributionsByTechnology(int id)
+        {
+            return contributionService.GetContributionsByTechnology(id);
         }
 
         [HttpGet("{id}")]
