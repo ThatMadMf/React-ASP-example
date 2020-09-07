@@ -13,11 +13,13 @@ namespace CompanyProjects.Services
     {
         private ApplicationDbContext context;
         private EmployeeService employeeService;
+        private ContributionService contributionService;
 
-        public ProjectService(ApplicationDbContext context, EmployeeService employeeService)
+        public ProjectService(ApplicationDbContext context, EmployeeService employeeService, ContributionService contributionService)
         {
             this.context = context;
             this.employeeService = employeeService;
+            this.contributionService = contributionService;
         }
 
         public List<Project> GetAll()
@@ -35,9 +37,21 @@ namespace CompanyProjects.Services
             .FirstOrDefault();
         }
 
+        public void AddContribution(int id, Contribution contribution)
+        {
+            contribution.ProjectId = id;
+            contributionService.AddContribution(contribution);
+        }
+
         public ICollection<Technology> GetProjectTechnologies(int id)
         {
             return GetProjectById(id).ProjectTechnologies.Select(pt => pt.Technology).ToHashSet();
+        }
+
+        internal void AddToProject(int id, int employeeId)
+        {
+            GetProjectById(id).ActiveStaff.Add(employeeService.GetEmployeeById(employeeId));
+            context.SaveChanges();
         }
 
         public Project SaveProject(Project project)

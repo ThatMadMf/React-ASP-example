@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyProjects.Data;
 using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
+using System;
 
 namespace CompanyProjects.Services
 {
@@ -29,6 +30,7 @@ namespace CompanyProjects.Services
 
             if (employee == null)
             {
+                Console.WriteLine(id);
                 throw new RecordWithIdNotExists("Employee with id does not exist");
             }
             return employee;

@@ -40,7 +40,7 @@ namespace CompanyProjects.Services
                 contribution.StartDate = DateTime.Now;
             }
             if(contribution.ProjectId != employeeService.GetEmployeeById(contribution.EmployeeId).ProjectId) {
-                throw new NotExistingForeignKeyException("Employee is not part of the project");
+                throw new NotExistingForeignKeyException("Employee can not contribute to the project");
             }
             try
             {

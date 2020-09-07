@@ -39,8 +39,29 @@ namespace CompanyProjects.Controllers
             return projectService.GetContributions(id);
         }
 
+        [HttpPost("{id}/employees")]
+        public IActionResult AddToProject(int id, int employeeId)
+        {
+            projectService.AddToProject(id, employeeId);
+            return Ok();
+        }
+
+        [HttpPost("{id}/contributions")]
+        public IActionResult AddContribution(int id, Contribution contribution)
+        {
+            try
+            {
+                projectService.AddContribution(id, contribution);
+                return Ok();
+            }
+            catch(NotExistingForeignKeyException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("{id}/technologies")]
-        public ICollection<string> GetProjectTechnologies(int id) 
+        public ICollection<string> GetProjectTechnologies(int id)
         {
             return projectService.GetProjectTechnologies(id).Select(t => t.Name).ToHashSet();
         }
@@ -49,7 +70,7 @@ namespace CompanyProjects.Controllers
         public ICollection<Employee> GetProjectActiveStaff(int id)
         {
             return projectService.GetProjectActiveStaff(id);
-        } 
+        }
 
         [HttpPost]
         public ActionResult<Project> AddProject(Project project)
@@ -66,9 +87,12 @@ namespace CompanyProjects.Controllers
         [HttpDelete("{id}/staff/{employeeId}")]
         public ActionResult<Project> RemoveEmployeeFromProject(int id, int employeeId)
         {
-            try {
+            try
+            {
                 return projectService.RemoveEmployee(id, employeeId);
-            } catch (RecordWithIdNotExists e) {
+            }
+            catch (RecordWithIdNotExists e)
+            {
                 return BadRequest(e.Message);
             }
         }
