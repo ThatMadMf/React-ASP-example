@@ -8,7 +8,10 @@ INSERT INTO CompanyStaff ('FirstName', 'SecondName', 'ProjectId') VALUES
     ('Name', 'NotName', NULL),
     ('Worker', 'NotWorker', NULL),
     ('Just', 'Need', 3),
-    ('Four', 'People', 3);
+    ('Four', 'People', 3),
+    ('Java', 'Developer', NULL),
+    ('Java', '2Developer', NULL);
+
 
 INSERT INTO Contributions ('Description', 'StartDate', 'FinishDate', 'TechnologyId','EmployeeId', 'ProjectId') VALUES
     ('Contibution 1', date('now', '-1 day'), date('now'), '4', '1', '1'),
@@ -17,7 +20,10 @@ INSERT INTO Contributions ('Description', 'StartDate', 'FinishDate', 'Technology
     ('Contibution 1', date('now', '-1 day'), date('now'), '1', '4', '2'),
     ('Contibution 2', date('now', '-1 day'), date('now'), '3', '2', '2'),
     ('Contibution 3', date('now', '-1 day'), NULL, '5', '3', '3'),
-    ('Contibution 4', date('now', '-1 day'), NULL, '1', '4', '3');
+    ('Contibution 4', date('now', '-1 day'), NULL, '1', '4', '3'),
+    ('Contibution 4', date('now', '-1 day'), date('now'), '1', '5', '1'),
+    ('Contibution 4', date('now', '-1 day'), date('now'), '1', '6', '1');
+
 
 INSERT INTO Technologies ('Name') VALUES 
     ('JAVA'),
