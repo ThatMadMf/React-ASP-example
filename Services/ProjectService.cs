@@ -105,9 +105,9 @@ namespace CompanyProjects.Services
             context.SaveChanges();
         }
 
-        public Project PickStaff(int id) {
+        public Project PickStaff(int id, int amount) {
             Project project = GetProjectById(id);
-            project.ActiveStaff = employeeService.PickEmployees(GetProjectTechnologies(id), 2);
+            project.ActiveStaff = employeeService.PickEmployees(GetProjectTechnologies(id), amount);
             project.ActiveStaff.Select(e => e.ProjectId = id);
 
             context.SaveChanges();

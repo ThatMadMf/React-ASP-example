@@ -79,9 +79,9 @@ namespace CompanyProjects.Controllers
         }
 
         [HttpPost("{id}/pick-staff")]
-        public ActionResult<Project> PickStaff(int id)
+        public ActionResult<Project> PickStaff(int id, int amount)
         {
-            return projectService.PickStaff(id);
+            return projectService.PickStaff(id, amount);
         }
 
         [HttpDelete("{id}/staff/{employeeId}")]
