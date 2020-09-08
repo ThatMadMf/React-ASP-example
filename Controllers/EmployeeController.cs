@@ -22,19 +22,27 @@ namespace CompanyProjects.Controllers
         }
 
         [HttpGet("free")]
-        public ICollection<Employee> GetFreeStaff() 
+        public ICollection<Employee> GetFreeStaff()
         {
             return employeeService.GetFreeStaff();
         }
 
         [HttpPost]
-        public ActionResult<Employee> AddEmployee([FromBody] Employee employee) {   
+        public ActionResult<Employee> AddEmployee([FromBody] Employee employee)
+        {
             return employeeService.AddEmployee(employee);
         }
 
         [HttpGet("{id}/contributions")]
-        public ICollection<Contribution> GetContributions(int id) {
+        public ICollection<Contribution> GetContributions(int id)
+        {
             return employeeService.GetAllEmployeeContributions(id);
+        }
+
+        [HttpGet("{id}/technologies")]
+        public ICollection<Technology> GetTechnologies(int id)
+        {
+            return employeeService.GetTechnologies(id);
         }
     }
 }
