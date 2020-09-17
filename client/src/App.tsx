@@ -45,7 +45,7 @@ function App() {
           <div className='projects-wrapper'>
             {
               projects.map((project) => {
-                return <Project id={project!.id} name={project!.name} />
+                return <Project id={project.id} name={project.name} />
               })
             }
           </div>
