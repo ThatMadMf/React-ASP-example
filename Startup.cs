@@ -33,12 +33,6 @@ namespace CompanyProjects
             services.AddControllersWithViews();
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
-
             services.AddScoped<ProjectService, ProjectService>();
             services.AddScoped<EmployeeService, EmployeeService>();
             services.AddScoped<ContributionService, ContributionService>();
@@ -59,9 +53,6 @@ namespace CompanyProjects
             }
 
             //app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-
             app.UseAuthentication();
 
             app.UseRouting();
@@ -73,16 +64,6 @@ namespace CompanyProjects
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
             });
         }
     }
