@@ -16,19 +16,19 @@ export const Navigation = () =>
             <nav>
                 <ul>
                     <li>
-                        <Link to="Projects">Projects</Link>
+                        <Link to="projects">Projects</Link>
                     </li>
                     <li>
-                        <Link to="Employees">Employees</Link>
+                        <Link to="employees">Employees</Link>
                     </li>
                 </ul>
             </nav>
             <Switch>
                 <div className='content-wrapper'>
-                    <Route exact path="/Projects">
+                    <Route exact path="/projects">
                         <Projects />
                     </Route>
-                    <Route exact path="/Employees">
+                    <Route exact path="/employees">
                         <Employees />
                     </Route>
                 </div>
