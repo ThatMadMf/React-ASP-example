@@ -1,5 +1,18 @@
-nav {
-    order: -1;
-    width: 20%;
+.router {
+    width: 100%;
     background-color: lightblue;
+    display: flex;
+    flex-direction: row;
 }
+
+nav {
+    background-color: lightgreen;
+    width: 20%;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }

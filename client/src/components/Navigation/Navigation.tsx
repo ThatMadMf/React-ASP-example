@@ -1,13 +1,37 @@
 import React from 'react';
-import NavigationModel from './Navigation.model';
 import './Navigation.css'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import Projects from '../../views/Projects-page';
+import Employees from '../../views/Employee-page';
 
-export const Navigation = ({ title, items }: NavigationModel) =>
-    <nav>
-        <h2>{title}</h2>
-        {
-            items.map((item) => {
-                return <a href={item.link}> {item.text} </a>
-            })
-        }
-    </nav>
+
+export const Navigation = () =>
+    <Router>
+        <div className="router">
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="Projects">Projects</Link>
+                    </li>
+                    <li>
+                        <Link to="Employees">Employees</Link>
+                    </li>
+                </ul>
+            </nav>
+            <Switch>
+                <div className='content-wrapper'>
+                    <Route exact path="/Projects">
+                        <Projects />
+                    </Route>
+                    <Route exact path="/Employees">
+                        <Employees />
+                    </Route>
+                </div>
+            </Switch>
+        </div>
+    </Router>
