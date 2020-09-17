@@ -1,4 +1,7 @@
 .project {
     background-color: green;
     min-width: 20%;
+    min-height: 10rem;
+    padding: 2rem;
+    margin: 2rem;
 }

@@ -30,13 +30,13 @@ function Projects() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div className='projects-wrapper'>
+            <React.Fragment>
                 {
                     projects.map((project) => {
                         return <Project id={project.id} name={project.name} />
                     })
                 }
-            </div>
+            </React.Fragment>
         );
     }
 }
