@@ -23,6 +23,17 @@ namespace CompanyProjects
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+                });
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlite(
                      Configuration.GetConnectionString("DefaultConnection")));
@@ -54,6 +65,7 @@ namespace CompanyProjects
 
             //app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseCors("default");
 
             app.UseRouting();
 
