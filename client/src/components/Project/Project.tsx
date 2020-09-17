@@ -4,5 +4,5 @@ import './Project.css'
 
 export const Project =  ({ id, name }: ProjectModel) =>
     <div className="project">
-        <p>{id} {name}</p>
+        <a href={'projects/' + id}>{name}</a>
     </div>
