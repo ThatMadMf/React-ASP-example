@@ -6,8 +6,9 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Projects from '../../views/Projects-page';
-import Employees from '../../views/Employee-page';
+import ProjectList from '../Project/ProjectList-page';
+import Employees from '../Employee/Employee-page';
+import Project from '../Project/Project-page';
 
 
 export const Navigation = () =>
@@ -16,20 +17,23 @@ export const Navigation = () =>
             <nav>
                 <ul>
                     <li>
-                        <Link to="projects">Projects</Link>
+                        <Link to="/projects">Projects</Link>
                     </li>
                     <li>
-                        <Link to="employees">Employees</Link>
+                        <Link to="/employees">Employees</Link>
                     </li>
                 </ul>
             </nav>
             <Switch>
                 <div className='content-wrapper'>
-                    <Route exact path="/projects">
-                        <Projects />
+                    <Route exact path='/projects'>
+                        <ProjectList />
                     </Route>
-                    <Route exact path="/employees">
+                    <Route exact path='/employees'>
                         <Employees />
+                    </Route>
+                    <Route path='/projects/:projectId'>
+                        <Project />
                     </Route>
                 </div>
             </Switch>

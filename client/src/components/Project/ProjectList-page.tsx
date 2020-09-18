@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Project } from "../components/Project/Project";
-import ProjectModel from "../components/Project/Project.model";
+import { Project } from "./Project";
+import ProjectModel from "./Project.model";
 
 
-function Projects() {
+function ProjectList() {
 
     const [error, setError] = useState<any>(null);
-    const [projects, setProjects] = useState<ProjectModel[]>([]);
+    const [projectList, setProjectList] = useState<ProjectModel[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function Projects() {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setProjects(result);
+                    setProjectList(result);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -30,15 +30,15 @@ function Projects() {
         return <div>Loading...</div>;
     } else {
         return (
-            <React.Fragment>
+            <div className='project-list'>
                 {
-                    projects.map((project) => {
-                        return <Project id={project.id} name={project.name} />
+                    projectList.map((project) => {
+                        return <Project {...project} />
                     })
                 }
-            </React.Fragment>
+            </div>
         );
     }
 }
 
-export default Projects;
+export default ProjectList;
