@@ -11,8 +11,6 @@ nav {
 }
 
 .content-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-around;
-  }
+    width: inherit;
+    margin: 5rem;
+}
