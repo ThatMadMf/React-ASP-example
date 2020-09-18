@@ -21,11 +21,11 @@ namespace CompanyProjects.Controllers
             return employeeService.GetCompanyStaff();
         }
 
-        [HttpGet("free")]
-        public ICollection<Employee> GetFreeStaff()
-        {
-            return employeeService.GetFreeStaff();
-        }
+        // [HttpGet("free")]
+        // public ICollection<Employee> GetFreeStaff()
+        // {
+        //     return employeeService.GetFreeStaff();
+        // }
 
         [HttpPost]
         public ActionResult<Employee> AddEmployee([FromBody] Employee employee)

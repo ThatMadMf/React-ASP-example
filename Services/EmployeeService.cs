@@ -36,10 +36,10 @@ namespace CompanyProjects.Services
             return employee;
         }
 
-        public ICollection<Employee> GetFreeStaff()
-        {
-            return GetCompanyStaff().Where(e => e.ProjectId == null).ToList();
-        }
+        // public ICollection<Employee> GetFreeStaff()
+        // {
+        //     return GetCompanyStaff().Where(e => e.ProjectId == null).ToList();
+        // }
         public Employee AddEmployee(Employee employee)
         {
             context.CompanyStaff.Add(employee);
@@ -72,12 +72,12 @@ namespace CompanyProjects.Services
                 .Intersect(technologies.Select(t => t.TechnologyId)).Count()
             );
         }
-        public ICollection<Employee> PickEmployees(ICollection<Technology> technologies, int amount)
-        {
-            return GetFreeStaff().Select(e => GetMatchingEmployee(technologies, e.Id))
-            .OrderByDescending(kv => kv.Value)
-            .Select(kv => kv.Key)
-            .Take(amount).ToList();
-        }
+        // public ICollection<Employee> PickEmployees(ICollection<Technology> technologies, int amount)
+        // {
+        //     return GetFreeStaff().Select(e => GetMatchingEmployee(technologies, e.Id))
+        //     .OrderByDescending(kv => kv.Value)
+        //     .Select(kv => kv.Key)
+        //     .Take(amount).ToList();
+        // }
     }
 }

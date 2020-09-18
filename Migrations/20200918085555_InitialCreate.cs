@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CompanyProjects.Migrations
 {
-    public partial class ItitialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,20 @@ namespace CompanyProjects.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompanyStaff",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FirstName = table.Column<string>(nullable: false),
+                    SecondName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyStaff", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,51 +193,6 @@ namespace CompanyProjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompanyStaff",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(nullable: false),
-                    SecondName = table.Column<string>(nullable: false),
-                    ProjectId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompanyStaff", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CompanyStaff_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProjectTechnology",
-                columns: table => new
-                {
-                    ProjectId = table.Column<int>(nullable: false),
-                    TechnologyId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectTechnology", x => new { x.ProjectId, x.TechnologyId });
-                    table.ForeignKey(
-                        name: "FK_ProjectTechnology_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProjectTechnology_Technologies_TechnologyId",
-                        column: x => x.TechnologyId,
-                        principalTable: "Technologies",
-                        principalColumn: "TechnologyId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contributions",
                 columns: table => new
                 {
@@ -250,6 +219,30 @@ namespace CompanyProjects.Migrations
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectTechnology",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(nullable: false),
+                    TechnologyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectTechnology", x => new { x.ProjectId, x.TechnologyId });
+                    table.ForeignKey(
+                        name: "FK_ProjectTechnology_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectTechnology_Technologies_TechnologyId",
+                        column: x => x.TechnologyId,
+                        principalTable: "Technologies",
+                        principalColumn: "TechnologyId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -289,11 +282,6 @@ namespace CompanyProjects.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CompanyStaff_ProjectId",
-                table: "CompanyStaff",
-                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EmployeeId",
@@ -344,10 +332,10 @@ namespace CompanyProjects.Migrations
                 name: "CompanyStaff");
 
             migrationBuilder.DropTable(
-                name: "Technologies");
+                name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Technologies");
         }
     }
 }

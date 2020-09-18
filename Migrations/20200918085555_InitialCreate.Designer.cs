@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyProjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200326160737_ItitialCreate")]
-    partial class ItitialCreate
+    [Migration("20200918085555_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,16 +61,11 @@ namespace CompanyProjects.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("SecondName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("CompanyStaff");
                 });
@@ -328,13 +323,6 @@ namespace CompanyProjects.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CompanyProjects.Models.Employee", b =>
-                {
-                    b.HasOne("CompanyProjects.Models.Project", null)
-                        .WithMany("ActiveStaff")
-                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("CompanyProjects.Models.ProjectTechnology", b =>
