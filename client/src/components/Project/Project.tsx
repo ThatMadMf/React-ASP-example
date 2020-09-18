@@ -1,8 +1,11 @@
 import React from 'react';
 import ProjectModel from './Project.model';
 import './Project.css'
+import { Link } from 'react-router-dom';
 
 export const Project =  ({ id, name }: ProjectModel) =>
     <div className="project">
-        <a href={'projects/' + id}>{name}</a>
+        {
+            <Link to={`/projects/${id}`}>{name}</Link>
+        }
     </div>
