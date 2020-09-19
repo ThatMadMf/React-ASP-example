@@ -7,13 +7,16 @@ namespace CompanyProjects.Models
     {
         public Project()
         {
-            ProjectTechnologies = new List<ProjectTechnology>();
+            Technologies = new HashSet<Technology>();
+            Employees = new HashSet<Employee>();
+            Contributions = new HashSet<Contribution>();
         }
+
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public ICollection<Contribution> Contributions { get; set; }
-        public ICollection<ProjectTechnology> ProjectTechnologies { get; set; }
-        private ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+        public ICollection<Technology> Technologies { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

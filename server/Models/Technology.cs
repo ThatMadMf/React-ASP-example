@@ -6,10 +6,11 @@ namespace CompanyProjects.Models
     {
         public Technology()
         {
+            Projects = new List<Project>();
         }
 
-        public int TechnologyId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection <ProjectTechnology> ProjectTechnologies { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }
