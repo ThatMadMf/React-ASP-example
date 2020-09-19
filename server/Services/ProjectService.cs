@@ -27,32 +27,38 @@ namespace CompanyProjects.Services
             return context.Projects.ToList();
         }
 
-        // public Project GetProjectById(int id)
-        // {
-        //     return context.Projects.Where(p => p.Id == id)
-        //     .Include(p => p.Contributions)
-        //     .Include(p => p.ProjectTechnologies)
-        //     .ThenInclude(pt => pt.Technology)
-        //     .Include(p => p.ActiveStaff)
-        //     .FirstOrDefault();
-        // }
-
-        public void AddContribution(int id, Contribution contribution)
+        public Project GetProjectById(int id)
         {
-            contribution.ProjectId = id;
-            contributionService.AddContribution(contribution);
+            return context.Projects.Where(p => p.Id == id)
+                .Include(p => p.Contributions)
+                .Include(p => p.Technologies)
+                .Include(p => p.Employees)
+                .FirstOrDefault();
         }
 
-        // public ICollection<Technology> GetProjectTechnologies(int id)
-        // {
-        //     return GetProjectById(id).ProjectTechnologies.Select(pt => pt.Technology).ToHashSet();
-        // }
+        internal ICollection<Contribution> GetContributions(int id)
+        {
+            return GetProjectById(id).Contributions;
+        }
 
-        // internal void AddToProject(int id, int employeeId)
-        // {
-        //     GetProjectById(id).ActiveStaff.Add(employeeService.GetEmployeeById(employeeId));
-        //     context.SaveChanges();
-        // }
+        internal Employee AddToProject(int id, int employeeId)
+        {
+            Employee employee = employeeService.GetEmployee(employeeId);
+            GetProjectById(id).Employees.Add(employee);
+            context.SaveChanges();
+            return employee;
+        }
+
+        public Contribution AddContribution(int id, Contribution contribution)
+        {
+            contribution.ProjectId = id;
+            return contributionService.AddContribution(contribution);
+        }
+
+        public ICollection<Technology> GetProjectTechnologies(int id)
+        {
+            return GetProjectById(id).Technologies.ToHashSet();
+        }
 
         public Project SaveProject(Project project)
         {
@@ -62,15 +68,11 @@ namespace CompanyProjects.Services
             return project;
         }
 
-        // internal ICollection<Employee> GetProjectActiveStaff(int id)
-        // {
-        //     return GetProjectById(id).ActiveStaff;
-        // }
+        internal ICollection<Employee> GetProjectActiveStaff(int id)
+        {
+            return GetProjectById(id).Employees;
+        }
 
-        // internal ICollection<Contribution> GetContributions(int id)
-        // {
-        //     return GetProjectById(id).Contributions;
-        // }
 
         // public Project ChangeProjectName(int id, Project project)
         // {

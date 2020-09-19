@@ -56,9 +56,8 @@ namespace CompanyProjects.Services
         {
             return GetAllEmployeeContributions(id)
                 .Select(c => c.TechnologyId)
-                .Distinct()
                 .Select(id => context.Technologies.Find(id))
-                .ToList();
+                .ToHashSet();
         }
 
         // public KeyValuePair<Employee, int> GetMatchingEmployee(ICollection<Technology> technologies, int id)

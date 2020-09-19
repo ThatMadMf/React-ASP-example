@@ -15,8 +15,8 @@ namespace CompanyProjects.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public ICollection<Contribution> Contributions { get; set; }
-        public ICollection<Technology> Technologies { get; set; }
+        public virtual ICollection<Contribution> Contributions { get; set; }
+        public virtual ICollection<Technology> Technologies { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }
