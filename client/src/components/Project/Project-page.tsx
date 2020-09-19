@@ -25,17 +25,23 @@ function Project() {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else {
+        const content = project?.employees.length == 0 ?
+            <h2>Has no active employees</h2> :
+            <div className='employees'>
+                <h2>Employees:</h2>
+                {
+                    project?.employees.map((employee) =>
+                        <p>{employee.firstName} {employee.secondName}</p>
+                    )
+                }
+            </div>
+
         return (
             <React.Fragment>
                 <h1>{project?.name}</h1>
-                <div className='employees'>
-                    <h2>Employees:</h2>
-                    {
-                        project?.activeStaff.map((employee) =>
-                            <p>{employee.firstName} {employee.secondName}</p>
-                        )
-                    }
-                </div>
+                {
+                    content
+                }
             </React.Fragment>
         );
     }
