@@ -7,6 +7,7 @@ namespace CompanyProjects.Models
     {
         public Employee()
         {
+            Contributions = new List<Contribution>();
             Projects = new List<Project>();
         }
         public int Id { get; set; }
@@ -14,7 +15,7 @@ namespace CompanyProjects.Models
         public string FirstName { get; set; }
         [Required]
         public string SecondName { get; set; }
-        public ICollection<Contribution> Contributions { get; set; }
+        public virtual ICollection<Contribution> Contributions { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
     }
 }

@@ -36,7 +36,10 @@ namespace CompanyProjects
             services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlite(
                      Configuration.GetConnectionString("DefaultConnection")));
-
+        
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.AddControllersWithViews();
 
