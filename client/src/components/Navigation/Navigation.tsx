@@ -7,8 +7,9 @@ import {
     Link
 } from "react-router-dom";
 import ProjectList from '../Project/ProjectList-page';
-import Employees from '../Employee/Employee-page';
+import Employee from '../Employee/Employee-page';
 import Project from '../Project/Project-page';
+import EmployeeList from '../Employee/EmployeeList';
 
 
 export const Navigation = () =>
@@ -29,8 +30,11 @@ export const Navigation = () =>
                     <Route exact path='/projects'>
                         <ProjectList />
                     </Route>
+                    <Route exact path='/employees'>
+                        <EmployeeList />
+                    </Route>
                     <Route exact path='/employees/:employeeId'>
-                        <Employees />
+                        <Employee />
                     </Route>
                     <Route path='/projects/:projectId'>
                         <Project />

@@ -1,3 +1,4 @@
+import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Project } from "./Project";
 import ProjectModel from "./Project.model";
@@ -10,12 +11,11 @@ function ProjectList() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/projects")
-            .then(res => res.json())
+        Axios.get<ProjectModel[]>('http://localhost:5000/api/projects')
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setProjectList(result);
+                    setProjectList(result.data);
                 },
                 (error) => {
                     setIsLoaded(true);
