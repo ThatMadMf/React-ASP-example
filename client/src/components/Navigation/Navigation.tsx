@@ -29,7 +29,7 @@ export const Navigation = () =>
                     <Route exact path='/projects'>
                         <ProjectList />
                     </Route>
-                    <Route exact path='/employees'>
+                    <Route exact path='/employees/:employeeId'>
                         <Employees />
                     </Route>
                     <Route path='/projects/:projectId'>

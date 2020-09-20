@@ -33,7 +33,7 @@ function ProjectList() {
             <div className='project-list'>
                 {
                     projectList.map((project) => {
-                        return <Project {...project} />
+                        return <Project {...project} key={project.id}/>
                     })
                 }
             </div>

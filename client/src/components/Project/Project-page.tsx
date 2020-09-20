@@ -1,6 +1,7 @@
+import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProjectModel from "./Project.model";
 
 function Project() {
@@ -10,18 +11,15 @@ function Project() {
     const { projectId }: any = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/projects/${projectId}`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setProject(result);
-                },
-                (error) => {
-                    setError(error);
-                }
-            )
+        Axios.get<ProjectModel>(`http://localhost:5000/api/projects/${projectId}`)
+            .then((response) => {
+                setProject(response.data);
+            })
+            .catch((response) => {
+                setError(response);
+            });
     }, [])
-
+    
     if (error) {
         return <div>Error: {error.message}</div>;
     } else {
@@ -30,8 +28,8 @@ function Project() {
             <div className='employees'>
                 <h2>Employees:</h2>
                 {
-                    project?.employees.map((employee) =>
-                        <p>{employee.firstName} {employee.secondName}</p>
+                    project?.employees.map((emp) =>
+                        <Link to={`/employees/${emp.id}`}>{emp.firstName} {emp.lastName}</Link>
                     )
                 }
             </div>
