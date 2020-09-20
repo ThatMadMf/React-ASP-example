@@ -14,7 +14,7 @@ namespace CompanyProjects.Models
         [Required]
         public string FirstName { get; set; }
         [Required]
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
         public virtual ICollection<Contribution> Contributions { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
     }

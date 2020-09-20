@@ -4,7 +4,7 @@ VALUES  ('Project No 1'),
         ('Project after second'),
         ('Project that needs to pick staff');
 
-INSERT INTO Employees ('FirstName', 'SecondName') 
+INSERT INTO Employees ('FirstName', 'LastName') 
 VALUES  ('Name', 'NotName'),
         ('Worker', 'NotWorker'),
         ('Just', 'Need'),
