@@ -9,7 +9,7 @@ import {
 import ProjectList from '../Project/ProjectList-page';
 import Employee from '../Employee/Employee-page';
 import Project from '../Project/Project-page';
-import EmployeeList from '../Employee/EmployeeList';
+import EmployeeList from '../Employee/EmployeeList-page';
 
 
 export const Navigation = () =>
@@ -22,6 +22,9 @@ export const Navigation = () =>
                     </li>
                     <li>
                         <Link to="/employees">Employees</Link>
+                    </li>
+                    <li>
+                        <Link to='contributions'>Contributions</Link>
                     </li>
                 </ul>
             </nav>
