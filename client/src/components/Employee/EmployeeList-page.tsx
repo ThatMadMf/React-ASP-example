@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EmployeeModel from "./Employee.model";
-
+import './EmployeeList-page.css'
 
 function EmployeeList() {
 
@@ -14,7 +14,6 @@ function EmployeeList() {
         Axios.get('http://localhost:5000/api/employees')
             .then(
                 (response) => {
-                    console.log(response);
                     setIsLoaded(true);
                     setEmployeeList(response.data);
                 },
@@ -31,17 +30,20 @@ function EmployeeList() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div className='employee-list'>
-                {
-                    employeeList.map((emp) => {
-                        return (
-                            <div>
-                                <Link to={`/employees/${emp.id}`}>{emp.firstName} {emp.lastName}</Link>
-                            </div>
-                        )
-                    })
-                }
-            </div>
+            <React.Fragment>
+                <h1>Employees:</h1>
+                <div className='employee-list'>
+                    {
+                        employeeList.map((emp) => {
+                            return (
+                                <div key={emp.id} className='employee'>
+                                    <Link to={`/employees/${emp.id}`}>{emp.firstName} {emp.lastName}</Link>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </React.Fragment>
         );
     }
 }
