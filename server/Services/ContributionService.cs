@@ -20,8 +20,13 @@ namespace CompanyProjects.Services
 
         public Contribution FindContributionById(int id)
         {
-            Contribution contribution = context.Contributions.Find(id);
-            if(contribution == null) {
+            Contribution contribution = context.Contributions
+                .Include(c => c.Technology)
+                .Include(c => c.Project)
+                .Include(c => c.Employee)
+                .FirstOrDefault(c => c.Id == id);
+            if (contribution == null)
+            {
                 throw new RecordWithIdNotExists("Contribution with this id does not exist");
             }
             return contribution;
@@ -68,6 +73,6 @@ namespace CompanyProjects.Services
         public ICollection<Contribution> GetContributions()
         {
             return context.Contributions.ToList();
-        } 
+        }
     }
 }
