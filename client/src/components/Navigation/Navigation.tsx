@@ -11,6 +11,7 @@ import Employee from '../Employee/Employee-page';
 import Project from '../Project/Project-page';
 import EmployeeList from '../Employee/EmployeeList-page';
 import ContributionList from '../Contribution/ContributionList-page';
+import ContributionPage from '../Contribution/Contribution-page';
 
 
 export const Navigation = () =>
@@ -45,6 +46,9 @@ export const Navigation = () =>
                     </Route>
                     <Route path='/projects/:projectId'>
                         <Project />
+                    </Route>
+                    <Route path='/contributions/:contributionId'>
+                        <ContributionPage />
                     </Route>
                 </div>
             </Switch>
