@@ -32,6 +32,9 @@ export const Navigation = () =>
             </nav>
             <Switch>
                 <div className='content-wrapper'>
+                    <Route exact path='/'>
+                        <h1>This is home page</h1>
+                    </Route>
                     <Route exact path='/projects'>
                         <ProjectList />
                     </Route>
