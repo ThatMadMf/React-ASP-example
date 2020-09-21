@@ -10,6 +10,7 @@ import ProjectList from '../Project/ProjectList-page';
 import Employee from '../Employee/Employee-page';
 import Project from '../Project/Project-page';
 import EmployeeList from '../Employee/EmployeeList-page';
+import ContributionList from '../Contribution/ContributionList-page';
 
 
 export const Navigation = () =>
@@ -35,6 +36,9 @@ export const Navigation = () =>
                     </Route>
                     <Route exact path='/employees'>
                         <EmployeeList />
+                    </Route>
+                    <Route exact path='/contributions'>
+                        <ContributionList />
                     </Route>
                     <Route exact path='/employees/:employeeId'>
                         <Employee />
