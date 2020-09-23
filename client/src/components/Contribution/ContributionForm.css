@@ -1,0 +1,15 @@
+form {
+    padding: 2rem;
+    border: 2px solid black;
+    width: 40%;
+}
+
+form > * {
+    padding: 0.25rem
+}
+
+form > input {
+    width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.5rem;
+}

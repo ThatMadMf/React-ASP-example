@@ -1,9 +1,9 @@
 import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Contribution } from "./Contribution";
 import ContributionModel from "./Contribution.model";
+import ContributionForm from "./ContributionForm";
 
 function ContributionList() {
 
@@ -32,6 +32,7 @@ function ContributionList() {
     } else {
         return (
             <React.Fragment>
+                <ContributionForm/>
                 <h1>Contributions:</h1>
                 <div>
                     {

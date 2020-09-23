@@ -3,7 +3,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Technology from "../Technology/Technology";
-import TechnologyModel from "../Technology/Technology.model";
 import ContributionModel from "./Contribution.model";
 
 function ContributionPage() {
