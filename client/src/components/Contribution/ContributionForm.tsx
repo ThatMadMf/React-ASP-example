@@ -44,7 +44,11 @@ function useFormSelectField(name: string, options: Option[]){
     }
 }
 
-function ContributionForm() {
+interface ContributionFormProps {
+    createContribution: Function;
+}
+
+function ContributionForm({createContribution} : ContributionFormProps) {
     const employees = useOption<EmployeeModel>('employees', (e) => ({ label: `${e.firstName} ${e.lastName}`, value: e.id }));
     const projects = useOption<ProjectModel>('projects', (p) => ({ label: p.name, value: p.id }));
     const technologies = useOption<TechnologyModel>('technologies', (t) => ({ label: t.name, value:t.id}))
@@ -57,7 +61,7 @@ function ContributionForm() {
             projectId: (projectSelect.value as Option).value,
             technologyId: (technologySelect.value as Option).value,
         } as ContributionDto;
-       return contributionDto;
+       createContribution(contributionDto);
     }
 
     const descriptionField = useFormTextField('description', '');

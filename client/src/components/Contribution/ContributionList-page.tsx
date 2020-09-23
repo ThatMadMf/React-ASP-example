@@ -2,6 +2,7 @@ import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Contribution } from "./Contribution";
+import ContributionDto from "./Contribution.dto";
 import ContributionModel from "./Contribution.model";
 import ContributionForm from "./ContributionForm";
 
@@ -25,6 +26,11 @@ function ContributionList() {
             )
     }, [])
 
+    function createContribution(contribution: ContributionDto) {
+        Axios.post('http://localhost:5000/api/contributions', contribution)
+            .then((response) => setContributionList([...contributionList, response.data]))
+    }
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -32,7 +38,7 @@ function ContributionList() {
     } else {
         return (
             <React.Fragment>
-                <ContributionForm/>
+                <ContributionForm createContribution={createContribution}/>
                 <h1>Contributions:</h1>
                 <div>
                     {
