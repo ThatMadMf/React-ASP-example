@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { fetchProjects, getProjects } from "../../store/projects/actions";
+import { fetchProjectList } from "../../store/projects/actions";
 import { Project } from "./Project";
 
 
 function ProjectList() {
-
     const projectList = useSelector((state : RootState) => state.projectReducer.projectList);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchProjects());
+        dispatch(fetchProjectList());
     }, [])
 
     if (projectList.length == 0) {

@@ -1,29 +1,24 @@
-import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import ProjectModel from "../../models/Project.model";
+import { RootState } from "../../store";
+import { fetchProject } from "../../store/projects/actions";
 import { Contribution } from "../Contribution/Contribution";
 import './Project-page.css'
 
 function Project() {
-    const [error, setError] = useState<any | null>(null);
-    const [project, setProject] = useState<ProjectModel | null>(null);
+    const project = useSelector((state: RootState) => state.projectReducer.project);
+    const dispatch = useDispatch();
 
     const { projectId }: any = useParams();
 
     useEffect(() => {
-        Axios.get<ProjectModel>(`http://localhost:5000/api/projects/${projectId}`)
-            .then((response) => {
-                setProject(response.data);
-            })
-            .catch((response) => {
-                setError(response);
-            });
+        dispatch(fetchProject(projectId));
     }, [])
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    if (!project) {
+        return <div>Cant load project data</div>;
     } else {
         return (
             <React.Fragment>
