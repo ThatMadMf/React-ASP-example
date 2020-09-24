@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Contribution } from "./Contribution";
 import ContributionDto from "./Contribution.dto";
-import ContributionModel from "./Contribution.model";
+import ContributionModel from "../../models/Contribution.model";
 import ContributionForm from "./ContributionForm";
 
 function ContributionList() {

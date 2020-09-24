@@ -1,5 +1,4 @@
-import ContributionModel from "../Contribution/Contribution.model";
-import Option from "../Contribution/Option.interface";
+import ContributionModel from "./Contribution.model";
 
 export default interface EmployeeModel{
     id: number;

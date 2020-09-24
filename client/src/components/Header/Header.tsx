@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderModel from './Header.model';
+import HeaderModel from '../../models/Header.model';
 import './Header.css'
 
 export const Header = ({ title, linkText } : HeaderModel) =>

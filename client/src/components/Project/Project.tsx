@@ -1,7 +1,7 @@
 import React from 'react';
-import ProjectModel from './Project.model';
 import './Project.css'
 import { Link } from 'react-router-dom';
+import ProjectModel from '../../models/Project.model';
 
 export const Project = ({ id, name }: ProjectModel) =>
     <div className="project">

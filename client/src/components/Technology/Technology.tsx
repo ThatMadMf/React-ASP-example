@@ -1,5 +1,5 @@
 import React from "react";
-import TechnologyModel from "./Technology.model";
+import TechnologyModel from "../../models/Technology.model";
 
 function Technology({id, name} : TechnologyModel ) {
     return (

@@ -1,6 +1,6 @@
-import EmployeeModel from "../Employee/Employee.model";
-import ProjectModel from "../Project/Project.model";
-import TechnologyModel from "../Technology/Technology.model";
+import ProjectModel from "./Project.model";
+import EmployeeModel from "./Employee.model";
+import TechnologyModel from "./Technology.model";
 
 export default interface ContributionModel {
     id: number;

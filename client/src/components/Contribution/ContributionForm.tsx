@@ -2,12 +2,12 @@ import Axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Select, { ValueType } from 'react-select';
-import EmployeeModel from '../Employee/Employee.model';
-import ProjectModel from '../Project/Project.model';
 import ContributionDto from './Contribution.dto';
 import Option from './Option.interface';
 import './ContributionForm.css'
-import TechnologyModel from '../Technology/Technology.model';
+import TechnologyModel from '../../models/Technology.model';
+import ProjectModel from '../../models/Project.model';
+import EmployeeModel from '../../models/Employee.model';
 
 function useOption<T>(name: string, mapper: (item: T) => Option): Option[] {
     const [options, setOptions] = useState<Option[]>([]);

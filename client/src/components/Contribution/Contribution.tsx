@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ContributionModel from './Contribution.model';
+import ContributionModel from '../../models/Contribution.model';
 import './Contribution.css'
 
 export const Contribution = ({ id, description, finishDate }: ContributionModel) =>

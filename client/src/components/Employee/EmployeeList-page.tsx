@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import EmployeeModel from "./Employee.model";
+import EmployeeModel from "../../models/Employee.model";
 import './EmployeeList-page.css'
 
 function EmployeeList() {

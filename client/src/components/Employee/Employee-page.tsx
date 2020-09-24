@@ -1,8 +1,8 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import EmployeeModel from "../../models/Employee.model";
 import { Contribution } from "../Contribution/Contribution";
-import EmployeeModel from "./Employee.model";
 
 function Employee() {
 

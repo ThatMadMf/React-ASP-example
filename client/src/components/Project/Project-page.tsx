@@ -2,8 +2,8 @@ import Axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import ProjectModel from "../../models/Project.model";
 import { Contribution } from "../Contribution/Contribution";
-import ProjectModel from "./Project.model";
 import './Project-page.css'
 
 function Project() {
