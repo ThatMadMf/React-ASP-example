@@ -1,10 +1,10 @@
 import ProjectModel from "../../models/Project.model";
 
-export const GET_PROJECTS = 'GET_PROJECTS';
+export const GET_PROJECT_LIST = 'GET_PROJECT_LIST';
 
-export interface GetProjectsAction {
-    type: typeof GET_PROJECTS,
+export interface GetProjectListAction {
+    type: typeof GET_PROJECT_LIST,
     projects: ProjectModel[]
-} 
+}
 
-export type ProjectActionTypes = GetProjectsAction;
+export type ProjectActionTypes = GetProjectListAction;

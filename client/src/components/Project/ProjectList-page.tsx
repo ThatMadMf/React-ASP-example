@@ -7,7 +7,7 @@ import { Project } from "./Project";
 
 function ProjectList() {
 
-    const projectList = useSelector((state : RootState) => state.projectReducer.projects);
+    const projectList = useSelector((state : RootState) => state.projectReducer.projectList);
     const dispatch = useDispatch();
 
     useEffect(() => {
