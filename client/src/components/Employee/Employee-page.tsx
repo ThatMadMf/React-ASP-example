@@ -1,29 +1,23 @@
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import EmployeeModel from "../../models/Employee.model";
+import { RootState } from "../../store";
+import { fetchEmployee } from "../../store/employees/actions";
 import { Contribution } from "../Contribution/Contribution";
 
 function Employee() {
 
-  const [error, setError] = useState<any | null>(null);
-  const [employee, setEmployee] = useState<EmployeeModel | null>(null);
-
+  const employee = useSelector((state: RootState) => state.employeeReducer.employee);
+  const dispatch = useDispatch();
   const { employeeId }: any = useParams();
 
   useEffect(() => {
-    Axios.get<EmployeeModel>(`http://localhost:5000/api/employees/${employeeId}`)
-      .then((response) => {
-        setEmployee(response.data);
-      })
-      .catch((response) => {
-        setError(response);
-      });
+    dispatch(fetchEmployee(employeeId));
   }, [])
 
   return (
-    error ?
-      <p>{error}</p> :
+    !employee ?
+      <p>Cant load employee's data</p> :
       <React.Fragment>
         <h2>{employee?.firstName} {employee?.lastName}</h2>
         <h3>Contributions:</h3>

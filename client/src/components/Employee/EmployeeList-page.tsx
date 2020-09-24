@@ -1,33 +1,22 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import EmployeeModel from "../../models/Employee.model";
+import { RootState } from "../../store";
+import { fetchEmployeeList } from "../../store/employees/actions";
 import './EmployeeList-page.css'
 
 function EmployeeList() {
 
-    const [error, setError] = useState<any>(null);
-    const [employeeList, setEmployeeList] = useState<EmployeeModel[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const employeeList = useSelector((state: RootState) => state.employeeReducer.employeeList);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        Axios.get('http://localhost:5000/api/employees')
-            .then(
-                (response) => {
-                    setIsLoaded(true);
-                    setEmployeeList(response.data);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
+        dispatch(fetchEmployeeList())
     }, [])
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
+    if (employeeList.length === 0) {
+        return <div>Cant load or find data</div>;
     } else {
         return (
             <React.Fragment>
