@@ -16,14 +16,11 @@ export function projectReducer(
     ) : ProjectsState {
         switch(action.type) {
             case GET_PROJECTS: {
-                ApiService.get('projects')
-                    .then((response) => {
-                        Object.assign(state.projects, response.data)
-                        return {
-                            ...state,
-                            projects: response.data
-                        }
-                    })
+                return {
+                    ...state,
+                    projects: action.projects
+                }
+                
             };
             default:
                 return state;

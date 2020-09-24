@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { getProjects } from "../../store/projects/actions";
+import { fetchProjects, getProjects } from "../../store/projects/actions";
 import { Project } from "./Project";
 
 
@@ -11,7 +11,7 @@ function ProjectList() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProjects());
+        dispatch(fetchProjects());
     }, [])
 
     if (projectList.length == 0) {
