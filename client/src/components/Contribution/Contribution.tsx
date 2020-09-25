@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import ContributionModel from '../../models/Contribution.model';
 import './Contribution.css'
 
-export const Contribution = ({ id, description, finishDate }: ContributionModel) =>
+export const Contribution = ({ id, description, startDate }: ContributionModel) =>
     <div className="contribution">
         <h3>Description:</h3>
         <p>{description}</p>
         <h3>Date</h3>
-        <p>{finishDate}</p>
+        <p>{startDate}</p>
         <Link to={`/contributions/${id}`}>Details</Link>
     </div>

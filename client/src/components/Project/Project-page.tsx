@@ -25,7 +25,6 @@ function Project() {
                 <h1>{project?.name}</h1>
                 {
                     <div>
-                        <h2>Has no active employees</h2>
                         <div className='employees'>
                             <h2>Employees:</h2>
                             {
@@ -33,6 +32,7 @@ function Project() {
                                     <Link key={emp.id} to={`/employees/${emp.id}`}>{emp.firstName} {emp.lastName}</Link>
                                 )
                             }
+                            
                         </div>
                         <h2>Contributions:</h2>
                         <div className='contributions'>

@@ -1,55 +1,19 @@
-import Axios from 'axios';
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import Select, { ValueType } from 'react-select';
 import ContributionDto from './Contribution.dto';
-import Option from './Option.interface';
+import Option from '../../models/Option.interface';
 import './ContributionForm.css'
 import TechnologyModel from '../../models/Technology.model';
 import ProjectModel from '../../models/Project.model';
 import EmployeeModel from '../../models/Employee.model';
 import { useDispatch } from 'react-redux';
 import { createContribution } from '../../store/contributions/actions';
-
-function useOption<T>(name: string, mapper: (item: T) => Option): Option[] {
-    const [options, setOptions] = useState<Option[]>([]);
-
-    useEffect(() => {
-        Axios.get(`http://localhost:5000/api/${name}`)
-            .then((response) => response.data)
-            .then((items) => items.map(mapper))
-            .then(setOptions);
-    }, [])
-    return options;
-}
-
-function useFormTextField(name: string, init: string) {
-    const [value, setValue] = useState(init);
-    return {
-        value,
-        name,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            return setValue(e.currentTarget.value);
-        }
-    }
-}
-
-function useFormSelectField(name: string, options: Option[]) {
-    const [value, setValue] = useState<ValueType<Option>>(options[0]);
-    return {
-        value,
-        name,
-        options,
-        onChange: (o: ValueType<Option>) => {
-            return setValue(o);
-        }
-    }
-}
+import FormUtils from '../../services/FormUtils';
 
 function ContributionForm() {
-    const employees = useOption<EmployeeModel>('employees', (e) => ({ label: `${e.firstName} ${e.lastName}`, value: e.id }));
-    const projects = useOption<ProjectModel>('projects', (p) => ({ label: p.name, value: p.id }));
-    const technologies = useOption<TechnologyModel>('technologies', (t) => ({ label: t.name, value: t.id }))
+    const employees = FormUtils.useOption<EmployeeModel>('employees', (e) => ({ label: `${e.firstName} ${e.lastName}`, value: e.id }));
+    const projects = FormUtils.useOption<ProjectModel>('projects', (p) => ({ label: p.name, value: p.id }));
+    const technologies = FormUtils.useOption<TechnologyModel>('technologies', (t) => ({ label: t.name, value: t.id }))
     const dispatch = useDispatch()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,10 +27,10 @@ function ContributionForm() {
         dispatch(createContribution(contributionDto));
     }
 
-    const descriptionField = useFormTextField('description', '');
-    const employeeSelect = useFormSelectField('employeeId', employees);
-    const projectSelect = useFormSelectField('projectId', projects);
-    const technologySelect = useFormSelectField('technologyId', technologies);
+    const descriptionField = FormUtils.useFormTextField('description', '');
+    const employeeSelect = FormUtils.useFormSelectField('employeeId', employees);
+    const projectSelect = FormUtils.useFormSelectField('projectId', projects);
+    const technologySelect = FormUtils.useFormSelectField('technologyId', technologies);
 
     return (
         <form onSubmit={handleSubmit}>
