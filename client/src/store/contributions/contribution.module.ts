@@ -1,5 +1,5 @@
 import ContributionModel from "../../models/Contribution.model";
-import { ContributionActionType, GET_CONTRIBUTION, GET_CONTRIBUTION_LIST } from "./types";
+import { ContributionActionType, CREATE_CONTRIBUTION, GET_CONTRIBUTION, GET_CONTRIBUTION_LIST } from "./types";
 
 interface ContributionsState {
     contributionList: ContributionModel[],
@@ -26,6 +26,14 @@ export function contributionReducer(state = defaultState, action: ContributionAc
             return {
                 ...state,
                 contribution: action.data
+            }
+        }
+
+        case CREATE_CONTRIBUTION: {
+
+            return {
+                ...state,
+                contributionList: [...state.contributionList, action.data]
             }
         }
 

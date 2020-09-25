@@ -1,8 +1,9 @@
 import { ActionCreator, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
+import ContributionDto from "../../components/Contribution/Contribution.dto";
 import ContributionModel from "../../models/Contribution.model";
 import { ApiService } from "../../services/ApiService";
-import { GetContributionAction, GetContributionListAction } from "./types";
+import { CreateContributionAction, GetContributionAction, GetContributionListAction } from "./types";
 
 export const fetchContributionList: ActionCreator<ThunkAction<Promise<any>, ContributionModel[], null, GetContributionListAction>> = () => {
     return async (dispatch: Dispatch) => {
@@ -25,3 +26,18 @@ export const fetchContribution: ActionCreator<ThunkAction<Promise<any>, Contribu
         return dispatch(getContributionAction);
     }
 }
+
+export const createContribution: ActionCreator<ThunkAction<
+    Promise<any>,
+    ContributionModel,
+    null,
+    CreateContributionAction>> = (contributionDto: ContributionDto) => {
+        return async (dispatch: Dispatch) => {
+            const response = await ApiService.post('contributions', contributionDto);
+            const createContributionAction: CreateContributionAction = {
+                type: 'CREATE_CONTRIBUTION',
+                data: response.data
+            };
+            return dispatch(createContributionAction);
+        }
+    }

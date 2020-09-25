@@ -8,6 +8,8 @@ import './ContributionForm.css'
 import TechnologyModel from '../../models/Technology.model';
 import ProjectModel from '../../models/Project.model';
 import EmployeeModel from '../../models/Employee.model';
+import { useDispatch } from 'react-redux';
+import { createContribution } from '../../store/contributions/actions';
 
 function useOption<T>(name: string, mapper: (item: T) => Option): Option[] {
     const [options, setOptions] = useState<Option[]>([]);
@@ -22,36 +24,33 @@ function useOption<T>(name: string, mapper: (item: T) => Option): Option[] {
 }
 
 function useFormTextField(name: string, init: string) {
-    const[value, setValue] = useState(init);
+    const [value, setValue] = useState(init);
     return {
         value,
         name,
-        onChange: (e : React.ChangeEvent<HTMLInputElement>) => {
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             return setValue(e.currentTarget.value);
         }
     }
 }
 
-function useFormSelectField(name: string, options: Option[]){
-    const[value, setValue] = useState<ValueType<Option>>(options[0]);
+function useFormSelectField(name: string, options: Option[]) {
+    const [value, setValue] = useState<ValueType<Option>>(options[0]);
     return {
         value,
         name,
         options,
-        onChange: (o : ValueType<Option>) => {
+        onChange: (o: ValueType<Option>) => {
             return setValue(o);
         }
     }
 }
 
-interface ContributionFormProps {
-    createContribution: Function;
-}
-
-function ContributionForm({createContribution} : ContributionFormProps) {
+function ContributionForm() {
     const employees = useOption<EmployeeModel>('employees', (e) => ({ label: `${e.firstName} ${e.lastName}`, value: e.id }));
     const projects = useOption<ProjectModel>('projects', (p) => ({ label: p.name, value: p.id }));
-    const technologies = useOption<TechnologyModel>('technologies', (t) => ({ label: t.name, value:t.id}))
+    const technologies = useOption<TechnologyModel>('technologies', (t) => ({ label: t.name, value: t.id }))
+    const dispatch = useDispatch()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -61,7 +60,7 @@ function ContributionForm({createContribution} : ContributionFormProps) {
             projectId: (projectSelect.value as Option).value,
             technologyId: (technologySelect.value as Option).value,
         } as ContributionDto;
-       createContribution(contributionDto);
+        dispatch(createContribution(contributionDto));
     }
 
     const descriptionField = useFormTextField('description', '');
@@ -69,12 +68,12 @@ function ContributionForm({createContribution} : ContributionFormProps) {
     const projectSelect = useFormSelectField('projectId', projects);
     const technologySelect = useFormSelectField('technologyId', technologies);
 
-    return (        
+    return (
         <form onSubmit={handleSubmit}>
             <label>Description:</label>
-            <input type='text' {...descriptionField}/>
+            <input type='text' {...descriptionField} />
             <label>Contributor</label>
-            <Select {...employeeSelect}/>
+            <Select {...employeeSelect} />
             <label>Project:</label>
             <Select {...projectSelect} />
             <label>Technology:</label>
