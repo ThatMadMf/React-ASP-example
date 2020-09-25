@@ -1,44 +1,34 @@
 import Axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Contribution } from "./Contribution";
 import ContributionDto from "./Contribution.dto";
-import ContributionModel from "../../models/Contribution.model";
 import ContributionForm from "./ContributionForm";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { fetchContributionList } from "../../store/contributions/actions";
 
 function ContributionList() {
 
-    const [error, setError] = useState<any>(null);
-    const [contributionList, setContributionList] = useState<ContributionModel[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+
+    const contributionList = useSelector((state: RootState) => state.contributionReducer.contributionList);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        Axios.get('http://localhost:5000/api/contributions')
-            .then(
-                (response) => {
-                    setIsLoaded(true);
-                    setContributionList(response.data);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
+        dispatch(fetchContributionList());
     }, [])
 
-    function createContribution(contribution: ContributionDto) {
-        Axios.post('http://localhost:5000/api/contributions', contribution)
-            .then((response) => setContributionList([...contributionList, response.data]))
-    }
+    // function createContribution(contribution: ContributionDto) {
+    //     Axios.post('http://localhost:5000/api/contributions', contribution)
+    //         .then((response) => setContributionList([...contributionList, response.data]))
+    // }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
+    if (contributionList.length === 0) {
+        return <div>Cant load any contributions</div>;
     } else {
         return (
             <React.Fragment>
-                <ContributionForm createContribution={createContribution}/>
+                {/* <ContributionForm createContribution={createContribution} /> */}
                 <h1>Contributions:</h1>
                 <div>
                     {

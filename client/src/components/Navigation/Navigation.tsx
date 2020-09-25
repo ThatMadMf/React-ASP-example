@@ -29,7 +29,7 @@ export const Navigation = () =>
                         <Link to="/employees">Employees</Link>
                     </li>
                     <li>
-                        <Link to='contributions'>Contributions</Link>
+                        <Link to='/contributions'>Contributions</Link>
                     </li>
                 </ul>
             </nav>
