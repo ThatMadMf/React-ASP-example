@@ -1,5 +1,5 @@
 import ProjectModel from "../../models/Project.model";
-import { GET_PROJECT, GET_PROJECT_LIST, ProjectActionTypes } from "./types";
+import { ADD_EMPLOYEE_TO_PROJECT, GET_PROJECT, GET_PROJECT_LIST, ProjectActionTypes } from "./types";
 
 interface ProjectsState {
     projectList: ProjectModel[];
@@ -25,6 +25,20 @@ export function projectReducer(state = defaultState, action: ProjectActionTypes)
             return {
                 ...state,
                 project: action.project
+            }
+        }
+
+        case ADD_EMPLOYEE_TO_PROJECT: {
+
+            return {
+                ...state,
+                project: {
+                    ...state.project!,
+                    employees: [
+                        ...state.project?.employees!,
+                        action.data
+                    ]
+                }
             }
         }
 

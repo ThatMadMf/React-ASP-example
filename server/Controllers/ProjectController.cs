@@ -6,6 +6,7 @@ using CompanyProjects.Models;
 using CompanyProjects.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using server.Models;
 
 namespace CompanyProjects.Controllers
 {
@@ -40,9 +41,9 @@ namespace CompanyProjects.Controllers
         }
 
         [HttpPost("{id}/employees")]
-        public Employee AddToProject(int id, int employeeId)
+        public Employee AddToProject(int id, NewEmployeeDto employeeDto)
         {
-            return projectService.AddToProject(id, employeeId);
+            return projectService.AddToProject(id, employeeDto);
         }
 
         [HttpPost("{id}/contributions")]

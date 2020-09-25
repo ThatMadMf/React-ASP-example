@@ -6,6 +6,7 @@ using CompanyProjects.Exceptions;
 using CompanyProjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server.Models;
 
 namespace CompanyProjects.Services
 {
@@ -41,9 +42,9 @@ namespace CompanyProjects.Services
             return GetProjectById(id).Contributions;
         }
 
-        internal Employee AddToProject(int id, int employeeId)
+        internal Employee AddToProject(int id, NewEmployeeDto employeeDto)
         {
-            Employee employee = employeeService.GetEmployee(employeeId);
+            Employee employee = employeeService.GetEmployee(employeeDto.employeeId);
             GetProjectById(id).Employees.Add(employee);
             context.SaveChanges();
             return employee;

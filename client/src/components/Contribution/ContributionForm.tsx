@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import Select, { ValueType } from 'react-select';
+import React, { } from 'react';
+import Select, { } from 'react-select';
 import ContributionDto from './Contribution.dto';
 import Option from '../../models/Option.interface';
 import './ContributionForm.css'

@@ -1,8 +1,9 @@
 import { ActionCreator, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
+import EmployeeModel from "../../models/Employee.model";
 import ProjectModel from "../../models/Project.model";
 import { ApiService } from "../../services/ApiService";
-import { GetProjectAction, GetProjectListAction } from "./types";
+import { AddEmployeeToProjectAction, GetProjectAction, GetProjectListAction } from "./types";
 
 export const fetchProjectList: ActionCreator<ThunkAction<Promise<any>, ProjectModel[], null, GetProjectListAction>> = () => {
     return async (dispatch: Dispatch) => {
@@ -25,3 +26,18 @@ export const fetchProject: ActionCreator<ThunkAction<Promise<any>, ProjectModel,
         return dispatch(getProjectAction);
     }
 }
+
+export const addEmployeeToProject: ActionCreator<ThunkAction<
+    Promise<any>,
+    EmployeeModel,
+    null,
+    AddEmployeeToProjectAction>> = (id: number, employeeId: number) => {
+        return async (dispatch: Dispatch) => {
+            const response = await ApiService.post(`projects/${id}/employees/`, {employeeId});
+            const addToProjectAction: AddEmployeeToProjectAction = {
+                type: 'ADD_EMPLOYEE_TO_PROJECT',
+                data: response.data
+            }
+            return dispatch(addToProjectAction);
+        }
+    }

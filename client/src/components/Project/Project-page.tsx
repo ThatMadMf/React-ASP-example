@@ -1,10 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { RootState } from "../../store";
 import { fetchProject } from "../../store/projects/actions";
 import { Contribution } from "../Contribution/Contribution";
+import AddToProjectForm from "./AddToProjectForm";
 import './Project-page.css'
 
 function Project() {
@@ -32,7 +33,7 @@ function Project() {
                                     <Link key={emp.id} to={`/employees/${emp.id}`}>{emp.firstName} {emp.lastName}</Link>
                                 )
                             }
-                            
+                            <AddToProjectForm />
                         </div>
                         <h2>Contributions:</h2>
                         <div className='contributions'>
