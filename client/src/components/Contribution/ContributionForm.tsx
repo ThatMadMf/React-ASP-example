@@ -70,6 +70,7 @@ function ContributionForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h2>New contribution</h2>
             <label>Description:</label>
             <input type='text' {...descriptionField} />
             <label>Contributor</label>

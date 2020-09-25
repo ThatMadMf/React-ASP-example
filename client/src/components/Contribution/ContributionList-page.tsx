@@ -1,4 +1,3 @@
-import Axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { Contribution } from "./Contribution";
@@ -6,6 +5,7 @@ import ContributionForm from "./ContributionForm";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { fetchContributionList } from "../../store/contributions/actions";
+import './ContributionList-page.css'
 
 function ContributionList() {
 
@@ -24,7 +24,7 @@ function ContributionList() {
             <React.Fragment>
                 <ContributionForm />
                 <h1>Contributions:</h1>
-                <div>
+                <div className='contribution-list'>
                     {
                         contributionList.map((c) => {
                             return <Contribution key={c.id} {...c} />
